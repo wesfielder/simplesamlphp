@@ -765,7 +765,7 @@ class SAMLBuilder
         // TODO: remove this check as soon as getContact() is called always before calling this function
         $details = Utils\Config\Metadata::getContact($details);
 
-        $details['type'] = $type;
+        $details['ContactType'] = $type;
         return ContactPerson::fromArray($details);
 /*
         $e = new ContactPerson();
