@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace SimpleSAML\Compat;
 
 use Psr\Log\LoggerInterface;
-use SAML2\Compat\AbstractContainer;
-use SAML2\XML\saml\CustomIdentifierInterface;
 use SimpleSAML\Assert\Assert;
+use SimpleSAML\SAML2\Compat\AbstractContainer;
+use SimpleSAML\SAML2\XML\saml\CustomIdentifierInterface;
 use SimpleSAML\Utils;
 use SimpleSAML\XML\AbstractXMLElement;
 
