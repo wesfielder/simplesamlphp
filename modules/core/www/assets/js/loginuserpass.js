@@ -1,3 +1,5 @@
+var organizations = new Choices(document.getElementById('organizations'), { shouldSort: true });
+
 $(document).ready(function () {
     $('#submit_button').on('click', function () {
         $(this).attr('disabled', 'disabled');
