@@ -1,6 +1,6 @@
 import "es6-shim";
 import ClipboardJS from "clipboard/dist/clipboard";
-import "selectize/dist/js/selectize";
+import Choices from "choices.js/public/assets/scripts/choices.js";
 import hljs from  "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
 import php from "highlight.js/lib/languages/php";
@@ -13,13 +13,17 @@ $(document).ready(function () {
     });
 
     // initialize selectize
-    $('#language-selector').selectize({
-        onChange: function () {
-            if (-1 !== $.inArray($('#language-selector-selectized').prev().text().toLowerCase(), languages)) {
-                $('#language-form').submit();
-            }
-        },
+    const choices = new Choices('#language-selector', {
+        choices: languages,
+        shouldSort: true,
     });
+//    $('#language-selector').selectize({
+//        onChange: function () {
+//            if (-1 !== $.inArray($('#language-selector-selectized').prev().text().toLowerCase(), languages)) {
+//                $('#language-form').submit();
+//            }
+//        },
+//    });
 
     // side menu
     $('#menuLink').click(function (e) {
