@@ -463,6 +463,7 @@ $config = [
      * In example when you are setting up a federation bridge.
      */
     'enable.saml20-idp' => false,
+    'enable.saml20-unsolicited' => false,
     'enable.adfs-idp' => false,
 
 
