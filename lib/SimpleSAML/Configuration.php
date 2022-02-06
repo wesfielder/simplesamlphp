@@ -590,6 +590,7 @@ class Configuration implements Utils\ClearableState
      *                            The default value can be null or a boolean.
      *
      * @return bool|null          The option with the given name, or $default.
+     * @psalm-return              ($default is bool ? bool : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not boolean.
      */
@@ -600,7 +601,18 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getBoolean($name);
+        $ret = $this->getValue($name);
+
+        Assert::nullOrBoolean(
+            $ret,
+            sprintf(
+                '%s: The option %s is not a valid boolean value or null.',
+                $this->location,
+                var_export($name, true)
+            ),
+        );
+
+        return $ret;
     }
 
 
@@ -637,6 +649,7 @@ class Configuration implements Utils\ClearableState
      *                               The default value can be null or a string.
      *
      * @return string|null The option with the given name, or $default if the option isn't found.
+     * @psalm-return       ($default is string ? string : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not a string.
      */
@@ -647,7 +660,18 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getString($name);
+        $ret = $this->getValue($name);
+
+        Assert::nullOrString(
+            $ret,
+            sprintf(
+                '%s: The option %s is not a valid string value or null.',
+                $this->location,
+                var_export($name, true)
+            ),
+        );
+
+        return $ret;
     }
 
 
@@ -684,6 +708,7 @@ class Configuration implements Utils\ClearableState
      *                         The default value can be null or an integer.
      *
      * @return int|null The option with the given name, or $default if the option isn't found.
+     * @psalm-return    ($default is integer ? integer : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not an integer.
      */
@@ -694,7 +719,18 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getInteger($name);
+        $ret = $this->getValue($name);
+
+        Assert::nullOrInteger(
+            $ret,
+            sprintf(
+                '%s: The option %s is not a valid integer value or null.',
+                $this->location,
+                var_export($name, true)
+            ),
+        );
+
+        return $ret;
     }
 
 
@@ -748,6 +784,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return int|null The option with the given name, or $default if the option isn't found and $default is
      *     specified.
+     * @psalm-return    ($default is integer ? integer : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not in the range specified.
      */
@@ -758,7 +795,20 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getIntegerRange($name, $minimum, $maximum);
+        $ret = $this->getOptionalInteger($name);
+
+        Assert::nullOrRange(
+            $ret,
+            $minimum,
+            $maximum,
+            sprintf(
+                '%s: The option %s is not a valid integer value or null.',
+                $this->location,
+                var_export($name, true)
+            ),
+        );
+
+        return $ret;
     }
 
 
@@ -819,7 +869,7 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getValueValidate($name, $allowedValues);
+        return $this->getValueValidate($name, array_merge($allowedValues, [null]));
     }
 
 
@@ -857,6 +907,7 @@ class Configuration implements Utils\ClearableState
      *
      * @return array|null The option with the given name, or $default if the option isn't found and $default is
      * specified.
+     * @psalm-return       ($default is array ? array : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not an array.
      */
@@ -867,7 +918,14 @@ class Configuration implements Utils\ClearableState
             return $default;
         }
 
-        return $this->getArray($name);
+        $ret = $this->getValue($name);
+
+        Assert::nullOrIsArray(
+            $ret,
+            sprintf('%s: The option %s is not an array or null.', $this->location, var_export($name, true)),
+        );
+
+        return $ret;
     }
 
 
@@ -902,6 +960,7 @@ class Configuration implements Utils\ClearableState
      *                       The default value can be null or an array.
      *
      * @return array|null The option with the given name.
+     * @psalm-return      ($default is array ? array : null)
      */
     public function getOptionalArrayize(string $name, $default): ?array
     {
@@ -956,6 +1015,7 @@ class Configuration implements Utils\ClearableState
      *                         The default value can be null or an array of strings.
      *
      * @return string[]|null The option with the given name, or $default if the option isn't found and $default is specified.
+     * @psalm-return         ($default is array ? array : null)
      *
      * @throws \SimpleSAML\Assert\AssertionFailedException If the option is not a string or an array of strings.
      */
@@ -1014,7 +1074,11 @@ class Configuration implements Utils\ClearableState
     {
         if (!$this->hasValue($name)) {
             // the option wasn't found, or it matches the default value. In any case, return this value
-            return $default;
+            if ($default === null) {
+                return null;
+            }
+
+            return self::loadFromArray($default, $this->location . '[' . var_export($name, true) . ']');
         }
 
         return $this->getConfigItem($name);
