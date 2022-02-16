@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac7d8b37e73b4def8e512af988306095",
+    "content-hash": "6cef2dd76a05b0042f03789dd2a3cbfb",
     "packages": [
         {
             "name": "gettext/gettext",
@@ -534,16 +534,16 @@
         },
         {
             "name": "simplesamlphp/saml2",
-            "version": "v4.4.1",
+            "version": "dev-v4-serialization",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/saml2.git",
-                "reference": "267584be957d5797a6b3e17f5dca9123911b0000"
+                "reference": "af2d8ae29f0ee2179144182832a9f46e50ab77e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/267584be957d5797a6b3e17f5dca9123911b0000",
-                "reference": "267584be957d5797a6b3e17f5dca9123911b0000",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/af2d8ae29f0ee2179144182832a9f46e50ab77e9",
+                "reference": "af2d8ae29f0ee2179144182832a9f46e50ab77e9",
                 "shasum": ""
             },
             "require": {
@@ -586,9 +586,9 @@
             "description": "SAML2 PHP library from SimpleSAMLphp",
             "support": {
                 "issues": "https://github.com/simplesamlphp/saml2/issues",
-                "source": "https://github.com/simplesamlphp/saml2/tree/v4.4.1"
+                "source": "https://github.com/simplesamlphp/saml2/tree/v4-serialization"
             },
-            "time": "2022-01-26T09:12:55+00:00"
+            "time": "2022-02-16T21:14:53+00:00"
         },
         {
             "name": "symfony/cache",
@@ -6628,6 +6628,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "simplesamlphp/saml2": 20,
         "simplesamlphp/simplesamlphp-module-adfs": 5
     },
     "prefer-stable": false,
