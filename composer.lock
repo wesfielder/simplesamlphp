@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bb688da676c19d233b6e66fc7f79a31",
+    "content-hash": "05c732d1a2827248e6871d19ffd81759",
     "packages": [
         {
             "name": "gettext/gettext",
@@ -607,16 +607,16 @@
         },
         {
             "name": "simplesamlphp/saml2",
-            "version": "v4.4.0",
+            "version": "dev-v4-serialization",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/saml2.git",
-                "reference": "f3b13417deb45f882f676108c250143f994eb2a4"
+                "reference": "af2d8ae29f0ee2179144182832a9f46e50ab77e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/f3b13417deb45f882f676108c250143f994eb2a4",
-                "reference": "f3b13417deb45f882f676108c250143f994eb2a4",
+                "url": "https://api.github.com/repos/simplesamlphp/saml2/zipball/af2d8ae29f0ee2179144182832a9f46e50ab77e9",
+                "reference": "af2d8ae29f0ee2179144182832a9f46e50ab77e9",
                 "shasum": ""
             },
             "require": {
@@ -659,9 +659,9 @@
             "description": "SAML2 PHP library from SimpleSAMLphp",
             "support": {
                 "issues": "https://github.com/simplesamlphp/saml2/issues",
-                "source": "https://github.com/simplesamlphp/saml2/tree/v4.4.0"
+                "source": "https://github.com/simplesamlphp/saml2/tree/v4-serialization"
             },
-            "time": "2022-01-20T17:38:13+00:00"
+            "time": "2022-02-16T21:14:53+00:00"
         },
         {
             "name": "simplesamlphp/simplesamlphp-module-adfs",
@@ -7528,7 +7528,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "simplesamlphp/saml2": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
